@@ -37,5 +37,11 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
                 Assert.True(false, "NotImplementedException thrown.");
             }
         }
+
+        [Theory, TestConventions]
+        public void OnNextWarmerEmptyDoesNotThrow(Indicator sut)
+        {
+            Assert.DoesNotThrow(() => sut.OnNext(BoilerStatus.NOT_EMPTY));
+        }
     }
 }
