@@ -32,6 +32,7 @@ namespace Ploeh.Samples.CoffeeMaker
         public void OnNext(BoilerStatus value)
         {
             this.hasWater = value == BoilerStatus.NOT_EMPTY;
+            this.hardware.SetBoilerState(BoilerState.OFF);
         }
     }
 }
