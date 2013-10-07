@@ -9,6 +9,7 @@ namespace Ploeh.Samples.CoffeeMaker
     {
         private readonly ICoffeeMaker hardware;
         private bool hasWater;
+        private bool isBrewing;
 
         public Indicator(ICoffeeMaker hardware)
         {
@@ -26,12 +27,17 @@ namespace Ploeh.Samples.CoffeeMaker
         public void OnNext(BoilerStatus value)
         {
             this.hasWater = value == BoilerStatus.NOT_EMPTY;
+            if (this.isBrewing)
+                this.hardware.SetIndicatorState(IndicatorState.ON);
         }
 
         public void OnNext(BrewButtonStatus value)
         {
             if (this.hasWater && value == BrewButtonStatus.PUSHED)
+            {
                 this.hardware.SetIndicatorState(IndicatorState.OFF);
+                this.isBrewing = true;
+            }
         }
     }
 }
