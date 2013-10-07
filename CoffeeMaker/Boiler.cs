@@ -17,7 +17,7 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BrewButtonStatus value)
         {
-            if (this.hasWater && value == BrewButtonStatus.PUSHED)
+            if (this.hasWater && value == BrewButtonStatus.PUSHED)                
                 this.hardware.SetBoilerState(BoilerState.ON);
         }
 
