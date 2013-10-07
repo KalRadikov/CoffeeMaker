@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Xunit.Extensions;
 using Ploeh.Samples.CoffeeMaker;
 using Xunit;
+using Ploeh.AutoFixture.Xunit;
+using Moq;
 
 namespace Ploeh.Samples.CoffeeMaker.UnitTests
 {
@@ -54,6 +56,17 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         public void OnNextBrewButtonNotPushedDoesNotThrow(Indicator sut)
         {
             Assert.DoesNotThrow(() => sut.OnNext(BrewButtonStatus.NOT_PUSHED));
+        }
+
+        [Theory, TestConventions]
+        public void StartBrewCycleTurnsOffIndicator(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Indicator sut)
+        {
+            sut.OnNext(BoilerStatus.NOT_EMPTY);
+            sut.OnNext(BrewButtonStatus.PUSHED);
+
+            hardwareMock.Verify(hw => hw.SetIndicatorState(IndicatorState.OFF));
         }
     }
 }
