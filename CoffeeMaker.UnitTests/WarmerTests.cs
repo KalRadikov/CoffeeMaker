@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions;
 using Ploeh.Samples.CoffeeMaker;
+using Ploeh.AutoFixture.Xunit;
+using Moq;
 
 namespace Ploeh.Samples.CoffeeMaker.UnitTests
 {
@@ -42,6 +44,16 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         public void OnNextWarmerEmptyDoesNotThrow(Warmer sut)
         {
             Assert.DoesNotThrow(() => sut.OnNext(WarmerPlateStatus.WARMER_EMPTY));
+        }
+
+        [Theory, TestConventions]
+        public void OnNexPotNotEmptyTurnsOnWarmer(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Warmer sut)
+        {
+            sut.OnNext(WarmerPlateStatus.POT_NOT_EMPTY);
+
+            hardwareMock.Verify(hw => hw.SetWarmerState(WarmerState.ON));
         }
     }
 }
