@@ -54,6 +54,9 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
             sut.OnNext(WarmerPlateStatus.POT_NOT_EMPTY);
 
             hardwareMock.Verify(hw => hw.SetWarmerState(WarmerState.ON));
+            hardwareMock.Verify(
+                hw => hw.SetWarmerState(WarmerState.OFF),
+                Times.Never());
         }
 
         [Theory, TestConventions]
@@ -64,6 +67,22 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
             sut.OnNext(WarmerPlateStatus.POT_EMPTY);
 
             hardwareMock.Verify(hw => hw.SetWarmerState(WarmerState.OFF));
+            hardwareMock.Verify(
+                hw => hw.SetWarmerState(WarmerState.ON),
+                Times.Never());
+        }
+
+        [Theory, TestConventions]
+        public void OnNextWarmerEmptyTurnsOffWarmer(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Warmer sut)
+        {
+            sut.OnNext(WarmerPlateStatus.WARMER_EMPTY);
+
+            hardwareMock.Verify(hw => hw.SetWarmerState(WarmerState.OFF));
+            hardwareMock.Verify(
+                hw => hw.SetWarmerState(WarmerState.ON),
+                Times.Never());
         }
     }
 }
