@@ -14,20 +14,20 @@ namespace Ploeh.Samples.CoffeeMaker
             this.hardware = hardware;
         }
 
-        public void OnCompleted()
-        {
-        }
-
-        public void OnError(Exception error)
-        {
-        }
-
         public void OnNext(WarmerPlateStatus value)
         {
             if (value == WarmerPlateStatus.WARMER_EMPTY)
                 this.hardware.SetReliefValveState(ReliefValveState.OPEN);
             else
                 this.hardware.SetReliefValveState(ReliefValveState.CLOSED);
+        }
+
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
         }
     }
 }
