@@ -56,5 +56,27 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
             hardwareMock.Verify(
                 hw => hw.SetReliefValveState(ReliefValveState.OPEN));
         }
+
+        [Theory, TestConventions]
+        public void CloseValveWhenEmptyPotIsPresent(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            ReliefValve sut)
+        {
+            sut.OnNext(WarmerPlateStatus.POT_EMPTY);
+
+            hardwareMock.Verify(
+                hw => hw.SetReliefValveState(ReliefValveState.CLOSED));
+        }
+
+        [Theory, TestConventions]
+        public void CloseValveWhenPotIsPresent(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            ReliefValve sut)
+        {
+            sut.OnNext(WarmerPlateStatus.POT_NOT_EMPTY);
+
+            hardwareMock.Verify(
+                hw => hw.SetReliefValveState(ReliefValveState.CLOSED));
+        }
     }
 }
