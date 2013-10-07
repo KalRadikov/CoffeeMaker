@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
+using Ploeh.AutoFixture.Xunit;
 using Ploeh.Samples.CoffeeMaker;
 using Xunit;
 using Xunit.Extensions;
@@ -42,6 +44,17 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         public void OnNextWarmerEmptyDoesNotThrow(ReliefValve sut)
         {
             Assert.DoesNotThrow(() => sut.OnNext(WarmerPlateStatus.WARMER_EMPTY));
+        }
+
+        [Theory, TestConventions]
+        public void OpenValveWhenRemovingPotFromWarmerPlate(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            ReliefValve sut)
+        {
+            sut.OnNext(WarmerPlateStatus.WARMER_EMPTY);
+
+            hardwareMock.Verify(
+                hw => hw.SetReliefValveState(ReliefValveState.OPEN));
         }
     }
 }

@@ -7,6 +7,13 @@ namespace Ploeh.Samples.CoffeeMaker
 {
     public class ReliefValve : IObserver<WarmerPlateStatus>
     {
+        private readonly ICoffeeMaker hardware;
+
+        public ReliefValve(ICoffeeMaker hardware)
+        {
+            this.hardware = hardware;
+        }
+
         public void OnCompleted()
         {
         }
@@ -17,6 +24,7 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(WarmerPlateStatus value)
         {
+            this.hardware.SetReliefValveState(ReliefValveState.OPEN);
         }
     }
 }
