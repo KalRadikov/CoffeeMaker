@@ -52,6 +52,7 @@
     <Compile Include="HardwareApi.cs" />
     <Compile Include="Indicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReliefValve.cs" />
     <Compile Include="WarmerPlate.cs" />
   </ItemGroup>
   <ItemGroup>
