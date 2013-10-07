@@ -8,6 +8,7 @@ namespace Ploeh.Samples.CoffeeMaker
     public class Indicator : IObserver<BoilerStatus>, IObserver<BrewButtonStatus>
     {
         private readonly ICoffeeMaker hardware;
+        private bool hasWater;
 
         public Indicator(ICoffeeMaker hardware)
         {
@@ -24,11 +25,13 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BoilerStatus value)
         {
+            this.hasWater = true;
         }
 
         public void OnNext(BrewButtonStatus value)
         {
-            this.hardware.SetIndicatorState(IndicatorState.OFF);
+            if (this.hasWater)
+                this.hardware.SetIndicatorState(IndicatorState.OFF);
         }
     }
 }
