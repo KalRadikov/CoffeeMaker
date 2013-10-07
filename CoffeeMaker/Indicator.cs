@@ -25,7 +25,7 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BoilerStatus value)
         {
-            this.hasWater = true;
+            this.hasWater = value == BoilerStatus.NOT_EMPTY;
         }
 
         public void OnNext(BrewButtonStatus value)

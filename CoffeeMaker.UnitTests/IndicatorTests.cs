@@ -80,5 +80,18 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
                 hw => hw.SetIndicatorState(It.IsAny<IndicatorState>()),
                 Times.Never());
         }
+
+        [Theory, TestConventions]
+        public void PushButtonDoesNothingWhenBoilerIsEmpty(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Indicator sut)
+        {
+            sut.OnNext(BoilerStatus.EMPTY);
+            sut.OnNext(BrewButtonStatus.PUSHED);
+
+            hardwareMock.Verify(
+                hw => hw.SetIndicatorState(It.IsAny<IndicatorState>()),
+                Times.Never());
+        }
     }
 }
