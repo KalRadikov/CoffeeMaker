@@ -22,5 +22,20 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         {
             Assert.DoesNotThrow(() => sut.OnCompleted());
         }
+
+        [Theory, TestConventions]
+        public void OnErrorDoesNotThrowNotImplementedException(
+            Warmer sut,
+            Exception e)
+        {
+            try
+            {
+                sut.OnError(e);
+            }
+            catch (NotImplementedException)
+            {
+                Assert.True(false, "NotImplementedException thrown.");
+            }
+        }
     }
 }
