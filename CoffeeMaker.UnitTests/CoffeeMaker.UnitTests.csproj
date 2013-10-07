@@ -70,7 +70,7 @@
     <Compile Include="BoilerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConventionsAttribute.cs" />
-    <Compile Include="WarmerTests.cs" />
+    <Compile Include="WarmerPlateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Ploeh.Samples.CoffeeMaker
 {
-    public class Warmer : IObserver<WarmerPlateStatus>
+    public class WarmerPlate : IObserver<WarmerPlateStatus>
     {
         private readonly ICoffeeMaker hardware;
 
-        public Warmer(ICoffeeMaker hardware)
+        public WarmerPlate(ICoffeeMaker hardware)
         {
             this.hardware = hardware;
         }

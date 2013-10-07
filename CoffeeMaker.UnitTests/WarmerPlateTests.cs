@@ -11,23 +11,23 @@ using Moq;
 
 namespace Ploeh.Samples.CoffeeMaker.UnitTests
 {
-    public class WarmerTests
+    public class WarmerPlateTests
     {
         [Theory, TestConventions]
-        public void SutIsObserverOfWarmerPlateStatus(Warmer sut)
+        public void SutIsObserverOfWarmerPlateStatus(WarmerPlate sut)
         {
             Assert.IsAssignableFrom<IObserver<WarmerPlateStatus>>(sut);
         }
 
         [Theory, TestConventions]
-        public void OnCompletedDoesNotThrow(Warmer sut)
+        public void OnCompletedDoesNotThrow(WarmerPlate sut)
         {
             Assert.DoesNotThrow(() => sut.OnCompleted());
         }
 
         [Theory, TestConventions]
         public void OnErrorDoesNotThrowNotImplementedException(
-            Warmer sut,
+            WarmerPlate sut,
             Exception e)
         {
             try
@@ -41,7 +41,7 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         }
 
         [Theory, TestConventions]
-        public void OnNextWarmerEmptyDoesNotThrow(Warmer sut)
+        public void OnNextWarmerEmptyDoesNotThrow(WarmerPlate sut)
         {
             Assert.DoesNotThrow(() => sut.OnNext(WarmerPlateStatus.WARMER_EMPTY));
         }
@@ -49,7 +49,7 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         [Theory, TestConventions]
         public void OnNexPotNotEmptyTurnsOnWarmer(
             [Frozen]Mock<ICoffeeMaker> hardwareMock,
-            Warmer sut)
+            WarmerPlate sut)
         {
             sut.OnNext(WarmerPlateStatus.POT_NOT_EMPTY);
 
@@ -62,7 +62,7 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         [Theory, TestConventions]
         public void OnNextPotEmptyTurnsOffWarmer(
             [Frozen]Mock<ICoffeeMaker> hardwareMock,
-            Warmer sut)
+            WarmerPlate sut)
         {
             sut.OnNext(WarmerPlateStatus.POT_EMPTY);
 
@@ -75,7 +75,7 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         [Theory, TestConventions]
         public void OnNextWarmerEmptyTurnsOffWarmer(
             [Frozen]Mock<ICoffeeMaker> hardwareMock,
-            Warmer sut)
+            WarmerPlate sut)
         {
             sut.OnNext(WarmerPlateStatus.WARMER_EMPTY);
 
