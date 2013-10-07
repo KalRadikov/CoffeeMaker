@@ -118,5 +118,19 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
 
             hardwareMock.Verify(hw => hw.SetIndicatorState(IndicatorState.ON));
         }
+
+        [Theory, TestConventions]
+        public void OnNextNonEmptyBoilerDoesNotTurnOnIndicatorWhileBrewing(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Indicator sut)
+        {
+            sut.OnNext(BoilerStatus.NOT_EMPTY);
+            sut.OnNext(BrewButtonStatus.PUSHED);
+            sut.OnNext(BoilerStatus.NOT_EMPTY);
+
+            hardwareMock.Verify(
+                hw => hw.SetIndicatorState(IndicatorState.ON),
+                Times.Never());
+        }
     }
 }

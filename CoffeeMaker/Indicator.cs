@@ -27,7 +27,7 @@ namespace Ploeh.Samples.CoffeeMaker
         public void OnNext(BoilerStatus value)
         {
             this.hasWater = value == BoilerStatus.NOT_EMPTY;
-            if (this.isBrewing)
+            if (this.isBrewing && value == BoilerStatus.EMPTY)
                 this.hardware.SetIndicatorState(IndicatorState.ON);
         }
 
