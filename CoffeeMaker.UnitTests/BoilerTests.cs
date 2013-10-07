@@ -68,5 +68,29 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
 
             hardwareMock.Verify(hw => hw.SetBoilerState(BoilerState.ON));
         }
+
+        [Theory, TestConventions]
+        public void FillBoilerWithoutPushingButtonDoesNotTurnOnBoiler(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Boiler sut)
+        {
+            sut.OnNext(BoilerStatus.NOT_EMPTY);
+
+            hardwareMock.Verify(
+                hw => hw.SetBoilerState(BoilerState.ON),
+                Times.Never());
+        }
+
+        [Theory, TestConventions]
+        public void PushButtonWithEmptyBoilerDoesNotStartsBoiler(
+            [Frozen]Mock<ICoffeeMaker> hardwareMock,
+            Boiler sut)
+        {
+            sut.OnNext(BrewButtonStatus.PUSHED);
+
+            hardwareMock.Verify(
+                hw => hw.SetBoilerState(BoilerState.ON),
+                Times.Never());
+        }
     }
 }
