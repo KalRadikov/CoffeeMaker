@@ -21,7 +21,6 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BoilerStatus value)
         {
-            throw new NotImplementedException();
         }
     }
 }
