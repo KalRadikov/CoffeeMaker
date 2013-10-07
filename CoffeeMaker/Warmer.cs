@@ -25,6 +25,7 @@ namespace Ploeh.Samples.CoffeeMaker
         public void OnNext(WarmerPlateStatus value)
         {
             this.hardware.SetWarmerState(WarmerState.ON);
+            this.hardware.SetWarmerState(WarmerState.OFF);
         }
     }
 }
