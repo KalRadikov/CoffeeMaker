@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Boiler.cs" />
     <Compile Include="HardwareApi.cs" />
+    <Compile Include="Indicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WarmerPlate.cs" />
   </ItemGroup>
