@@ -16,5 +16,11 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         {
             Assert.IsAssignableFrom<IObserver<BoilerStatus>>(sut);
         }
+
+        [Theory, TestConventions]
+        public void OnCompletedDoesNotThrow(Indicator sut)
+        {
+            Assert.DoesNotThrow(() => sut.OnCompleted());
+        }
     }
 }
