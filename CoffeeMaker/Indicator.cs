@@ -30,7 +30,7 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BrewButtonStatus value)
         {
-            if (this.hasWater)
+            if (this.hasWater && value == BrewButtonStatus.PUSHED)
                 this.hardware.SetIndicatorState(IndicatorState.OFF);
         }
     }
