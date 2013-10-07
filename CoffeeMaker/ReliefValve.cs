@@ -13,7 +13,6 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnError(Exception error)
         {
-            throw new NotImplementedException();
         }
 
         public void OnNext(WarmerPlateStatus value)
