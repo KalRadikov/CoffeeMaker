@@ -15,14 +15,6 @@ namespace Ploeh.Samples.CoffeeMaker
             this.hardware = hardware;
         }
 
-        public void OnCompleted()
-        {
-        }
-
-        public void OnError(Exception error)
-        {
-        }
-
         public void OnNext(BrewButtonStatus value)
         {
             if (this.hasWater && value == BrewButtonStatus.PUSHED)
@@ -34,6 +26,14 @@ namespace Ploeh.Samples.CoffeeMaker
             this.hasWater = value == BoilerStatus.NOT_EMPTY;
             if (!this.hasWater)
                 this.hardware.SetBoilerState(BoilerState.OFF);
+        }
+
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
         }
     }
 }
