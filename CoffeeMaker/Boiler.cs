@@ -17,7 +17,6 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BrewButtonStatus value)
         {
-            throw new NotImplementedException();
         }
     }
 }
