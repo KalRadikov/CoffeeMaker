@@ -43,5 +43,11 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         {
             Assert.DoesNotThrow(() => sut.OnNext(BoilerStatus.NOT_EMPTY));
         }
+
+        [Theory, TestConventions]
+        public void SutIsObserverOfBrewButtonStatus(Indicator sut)
+        {
+            Assert.IsAssignableFrom<IObserver<BrewButtonStatus>>(sut);
+        }
     }
 }

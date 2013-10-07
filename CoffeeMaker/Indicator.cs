@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.CoffeeMaker
 {
-    public class Indicator : IObserver<BoilerStatus>
+    public class Indicator : IObserver<BoilerStatus>, IObserver<BrewButtonStatus>
     {
         public void OnCompleted()
         {
@@ -17,6 +17,11 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public void OnNext(BoilerStatus value)
         {
+        }
+
+        public void OnNext(BrewButtonStatus value)
+        {
+            throw new NotImplementedException();
         }
     }
 }
