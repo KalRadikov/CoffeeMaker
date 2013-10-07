@@ -16,5 +16,11 @@ namespace Ploeh.Samples.CoffeeMaker.UnitTests
         {
             Assert.IsAssignableFrom<IObserver<WarmerPlateStatus>>(sut);
         }
+
+        [Theory, TestConventions]
+        public void OnCompletedDoesNotThrow(ReliefValve sut)
+        {
+            Assert.DoesNotThrow(() => sut.OnCompleted());
+        }
     }
 }

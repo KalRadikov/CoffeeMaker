@@ -9,7 +9,6 @@ namespace Ploeh.Samples.CoffeeMaker
     {
         public void OnCompleted()
         {
-            throw new NotImplementedException();
         }
 
         public void OnError(Exception error)
