@@ -22,10 +22,12 @@ namespace Ploeh.Samples.MakeCoffee
                 .Publish();
             var boilerEvents = Observable
                 .Interval(TimeSpan.FromSeconds(1))
-                .Select(_ => hardware.GetBoilerStatus());
+                .Select(_ => hardware.GetBoilerStatus())
+                .Publish();
             var warmerEvents = Observable
                 .Interval(TimeSpan.FromSeconds(1))
-                .Select(_ => hardware.GetWarmerPlateStatus());
+                .Select(_ => hardware.GetWarmerPlateStatus())
+                .Publish();
 
             var boiler = new Boiler(hardware);
             var indicator = new Indicator(hardware);
@@ -40,6 +42,8 @@ namespace Ploeh.Samples.MakeCoffee
             using (warmerEvents.Subscribe(warmer))
             {
                 buttonEvents.Connect();
+                boilerEvents.Connect();
+                warmerEvents.Connect();
 
                 while (!Exit(hardware))
                     WriteHardwareState(hardware);
@@ -63,11 +67,22 @@ namespace Ploeh.Samples.MakeCoffee
                 case "PRESS":
                     hardware.BrewButtonStatus = BrewButtonStatus.PUSHED;
                     return false;
+                case "DRIP":
+                    hardware.WarmerPlateStatus = WarmerPlateStatus.POT_NOT_EMPTY;
+                    return false;
+                case "DRY":
+                    hardware.WarmerPlateStatus = WarmerPlateStatus.POT_EMPTY;
+                    return false;
+                case "TAKE":
+                    hardware.WarmerPlateStatus = WarmerPlateStatus.WARMER_EMPTY;
+                    return false;
                 case "EXIT":
                 case "QUIT":
                     return true;
+                case "HELP":
                 default:
-                    return false;;
+                    Console.WriteLine("Options: poll, fill, empty, press, drip, dry, take, exit, quit, help.");
+                    return false;
             }
         }
 
