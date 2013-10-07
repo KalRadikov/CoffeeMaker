@@ -51,6 +51,7 @@
     <Compile Include="Boiler.cs" />
     <Compile Include="HardwareApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warmer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
