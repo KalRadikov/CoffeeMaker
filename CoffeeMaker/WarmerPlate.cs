@@ -11,6 +11,9 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public WarmerPlate(ICoffeeMaker hardware)
         {
+            if (hardware == null)
+                throw new ArgumentNullException("hardware");
+
             this.hardware = hardware;
         }
 

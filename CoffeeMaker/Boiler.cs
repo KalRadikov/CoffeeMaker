@@ -12,6 +12,9 @@ namespace Ploeh.Samples.CoffeeMaker
 
         public Boiler(ICoffeeMaker hardware)
         {
+            if (hardware == null)
+                throw new ArgumentNullException("hardware");
+
             this.hardware = hardware;
         }
 

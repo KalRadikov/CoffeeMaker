@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="BoilerTests.cs" />
     <Compile Include="IndicatorTests.cs" />
+    <Compile Include="Invariants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReliefValveTests.cs" />
     <Compile Include="TestConventionsAttribute.cs" />
