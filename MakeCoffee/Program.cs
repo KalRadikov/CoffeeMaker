@@ -88,7 +88,7 @@ namespace Ploeh.Samples.MakeCoffee
 
         private static void WriteHardwareState(CoffeMakerInMemory hardware)
         {
-            Console.WriteLine("Coffe maker status {0:T}:", DateTime.Now);
+            Console.WriteLine("Coffee maker status {0:T}:", DateTime.Now);
 
             Console.Write("Ready indicator:\t");
             Console.ForegroundColor =
